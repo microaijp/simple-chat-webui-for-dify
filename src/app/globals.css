@@ -10,20 +10,153 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
+    /* --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0; */
+
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  /* color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
+}
+
+#chat::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+#chat {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  min-height: 40px;
+  max-height: 200px;
+}
+
+.chat-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.chat-list {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+
+
+#simple-nav {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+/* #chat {
+  field-sizing: content;
+  max-height: 10lh;
+} */
+
+#chat_box {
+  padding-top: 40px;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.chat-main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.chat-list {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+
+
+/* markdown */
+.assistant_chat_message {
+
+
+  * {
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: break-spaces;
+  }
+
+  h3 {
+    font-weight: 900;
+    border-left: solid 5px rgb(17 24 39 / var(--tw-text-opacity));
+    padding-left: 12px;
+    margin: 24px 0px 8px 0px;
+  }
+
+  code {
+    background-color: black;
+    color: aliceblue;
+    display: block;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 8px 0px;
+
+    a {
+      color: white;
+    }
+  }
+
+  p {
+    display: block;
+    margin: 4px 0px 12px 0px;
+  }
+
+  p:last-child {
+    display: block;
+    margin: 4px 0px 0px 0px;
+  }
+
+  a {
+    text-decoration: underline;
+    margin: 3px 0px;
+    display: inline-block;
+    color: blue;
+  }
+
+  hr {
+    margin-bottom: 12px;
+  }
+
+
+  h4 {
+    font-weight: 600;
+    margin: 12px 0px 4px 0px;
+  }
+
+
+  ol,
+  ul {
+    list-style-type: decimal;
+    margin: 8px;
+    margin-left: 20px;
+    white-space: normal;
+
+    li {
+      white-space: inherit;
+      margin-bottom: 12px;
+    }
+
+  }
 }
 
 @layer utilities {

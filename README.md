@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![simple-chat-webui-for-dify](public/readme/sample.png)
+This project is a very simple web UI made with Next.js for Dify.
+It is responsive and supports smartphones.
+
+I am currently learning programming, so please don't expect too much :P
 
 ## Getting Started
 
-First, run the development server:
+### Setting up the .env file
+Please configure at least the following two items, referring to the screenshot:
 
-```bash
+```
+DIFY_APP_API_BASE_URL=https://xxxxx.xxxx.xxx/v1
+DIFY_APP_API_KEY=app-XXXXXXXXXXXXXX
+```
+![api_screen_shot](public/readme/api.png)
+
+### Running locally
+You can start it in two steps:
+```
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to check.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Customization
+You can customize it with the .env file.
+![customize](public/readme/customize.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## BASIC Authentication
+```
+AUTH_MODE="BASIC"
+BASIC_AUTH_USER="basic_user"
+BASIC_AUTH_PASSWORD="basic_pass"
+```
+By setting `AUTH_MODE` to `BASIC`, you can enable BASIC authentication.
+If authentication is not needed, leave it empty.
 
 ## Deploy on Vercel
+Since Server-Sent Events are used, it also works on Vercel.
+However, in the free plan, the chat may be interrupted due to time limitations.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Heartfelt Thanks to the Dify Development Team
+Thank you very much for developing such a wonderful application.
+I sincerely appreciate it.

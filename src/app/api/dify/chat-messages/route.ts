@@ -4,10 +4,12 @@ import { ReadableStream } from 'stream/web';
 export async function POST(request) {
     const req = await request.json();
 
-    const DIFY_APP_API_BASE_URL = `${process.env.DIFY_APP_API_BASE_URL}/chat-messages`;
+    const DIFY_APP_API_BASE_URL = `${process.env.DIFY_APP_API_BASE_URL}/v1/chat-messages`;
     const DIFY_APP_API_KEY = process.env.DIFY_APP_API_KEY;
 
     const requestData = req;
+
+    console.log('DIFY_APP_API_BASE_URL', DIFY_APP_API_BASE_URL);
 
     const response = await fetch(DIFY_APP_API_BASE_URL, {
         method: 'POST',

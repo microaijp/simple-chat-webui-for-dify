@@ -15,6 +15,7 @@ export default function ChatPage() {
   const [conversationId, setConversationId] = useState('');
   const [waiting, setWaiting] = useState(false);
   const [message, setMessage] = useState("");
+
   const [chatItemList, setChatItemList] = useState([]);
 
   const chatListRef = useRef(null);
@@ -57,7 +58,7 @@ export default function ChatPage() {
 
 
   const handleFocusIn = () => {
-    if (isMobileDevice) {
+    if (isMobileDevice()) {
       mobileChatFocusTimer = setInterval(function () {
         scrollToBottom();
       }, 100);
@@ -79,6 +80,7 @@ export default function ChatPage() {
     });
   };
 
+
   useEffect(() => {
 
 
@@ -90,12 +92,14 @@ export default function ChatPage() {
       console.log('application_information', application_information);
 
       const opening_statement = application_information["opening_statement"] || '';
+      const suggested_questions = application_information["suggested_questions"] || [];
 
       if (opening_statement != '') {
         addChatItem({
           'type': 'assistant',
           'spinner': false,
-          'message': opening_statement
+          'message': opening_statement,
+          'suggested_questions': suggested_questions
         })
       }
     };
@@ -103,16 +107,15 @@ export default function ChatPage() {
 
   }, []);
 
-  const sendMessage = async (e) => {
+  const sendMessage = async (directMessage = null) => {
 
-    e.preventDefault();
-    if (message && waiting == false) {
+    if ((message || directMessage) && waiting == false) {
 
       const chat_message = {
         'inputs': {},
         'user': user,
         'response_mode': 'streaming',
-        'query': message,
+        'query': directMessage || message,
         'conversation_id': conversationId
       };
 
@@ -120,7 +123,7 @@ export default function ChatPage() {
       // from user
       addChatItem({
         'type': 'user',
-        'message': message
+        'message': directMessage || message,
       })
       // for assistant
       addChatItem({
@@ -175,7 +178,7 @@ export default function ChatPage() {
             try {
               let event_data = line.slice(6).trim();
               event_data = JSON.parse(event_data);
-              console.log('[SSE]', 'event_data', event_data);
+              // console.log('[SSE]', 'event_data', event_data);
 
               switch (event_data["event"]) {
                 case 'message':
@@ -305,6 +308,28 @@ export default function ChatPage() {
                                   {chatItem.message}
                                 </ReactMarkdown>
                               </p>
+
+                              {chatItem.suggested_questions && chatItem.suggested_questions.length > 0 &&
+                                <>
+
+                                  <ul className='flex flex-wrap gap-2 mt-4'>
+                                    {chatItem.suggested_questions.map((suggested_question, suggested_questions_index) => (
+                                      <>
+                                        <button
+                                          type="button"
+                                          className="text-blue-700 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-1 inline-block w-fit"
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            sendMessage(suggested_question);
+                                          }}
+                                        >{suggested_question}</button>
+                                      </>
+                                    ))}
+                                  </ul>
+
+
+                                </>
+                              }
                             </div>
                           </div>
                         </li>
@@ -331,7 +356,7 @@ export default function ChatPage() {
                 id="btn_chat"
                 type="button"
                 className="inline-flex justify-center items-center p-4 rounded-full cursor-pointer h-full"
-                onClick={sendMessage}
+                onClick={() => sendMessage()}
                 disabled={waiting}
               >
                 <img

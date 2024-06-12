@@ -37,6 +37,26 @@ BASIC_AUTH_PASSWORD="basic_pass"
 By setting `AUTH_MODE` to `BASIC`, you can enable BASIC authentication.
 If authentication is not needed, leave it empty.
 
+## Change log
+
+### v0.0.3
+Google Tag Mnagager is now supported.
+Specify the ID of Google tag manager for GTMID.
+If not used, specify empty.
+
+Example: `GTM-KZR8CDNR`
+
+.env
+```
+###### GoogleTagManager
+GTMID=
+```
+
+### v0.0.2
+The OPENING QUESTIONS function is now supported.
+
+![customize](public/readme/OPENING_QUESTIONS.png)
+
 ## Deploy on Vercel
 Since Server-Sent Events are used, it also works on Vercel.
 However, in the free plan, the chat may be interrupted due to time limitations.

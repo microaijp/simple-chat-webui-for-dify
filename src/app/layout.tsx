@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import type { Viewport } from 'next'
+import { GoogleTagManager } from '@next/third-parties/google'
+
 
 import "./globals.css";
 
@@ -37,6 +39,11 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" strategy="beforeInteractive" />
+        {process.env.GTMID != "" &&
+          <>
+            <GoogleTagManager gtmId={process.env.GTMID} />
+          </>
+        }
       </body>
     </html>
   );

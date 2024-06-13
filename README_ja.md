@@ -36,6 +36,26 @@ BASIC_AUTH_PASSWORD="basic_pass"
 `AUTH_MODE`を`BASIC`にすることで、BASIC認証をかけることができます。
 認証が不要な場合は、空に設定してください。
 
+## Change log
+
+### v0.0.3
+Google Tag Manager に対応しました。
+.env にてGTMIDを指定してください。
+利用しない場合は空のままにします。
+
+Example: `GTM-KZR8CDNR`
+
+.env
+```
+###### GoogleTagManager
+GTMID=
+```
+
+### v0.0.2
+開始質問 (OPENING QUESTIONS) に対応しました。
+
+![customize](public/readme/OPENING_QUESTIONS.png)
+
 ## Deploy on Vercel
 Server-Sent Events を使用しているので、Vercel でも動きます。
 ただし、無料プランでは時間の制限により、チャットが途中で途切れてしまうことがあります。

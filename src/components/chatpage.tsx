@@ -214,10 +214,10 @@ export default function ChatPage() {
   return (
     <>
 
-      <div className="h-screen flex flex-col">
+      <div className="">
 
         <Navbar></Navbar>
-        <div className="w-full max-w-screen-xl mx-auto px-0 xl:px-0 flex-grow chat-container">
+        <div className="chat-container">
           <div className="w-full h-full flex flex-col bg-white chat-main">
             <div
               ref={chatListRef}

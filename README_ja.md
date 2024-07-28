@@ -38,6 +38,14 @@ BASIC_AUTH_PASSWORD="basic_pass"
 
 ## Change log
 
+### v0.0.4
+![0.0.4](public/readme/0.0.4-1.png)
+メンテナンス機能を実装しました。  
+Difyのサーバーに接続ができない場合、自動的にメンテナンス画面に切り替わります。  
+表示するテキストは  
+.env `NEXT_PUBLIC_MAINTENANCE_TITLE` `NEXT_PUBLIC_MAINTENANCE_BODY` で設定可能です
+
+
 ### v0.0.3
 Google Tag Manager に対応しました。
 .env にてGTMIDを指定してください。

@@ -39,6 +39,14 @@ If authentication is not needed, leave it empty.
 
 ## Change log
 
+### v0.0.4
+![0.0.4](public/readme/0.0.4-1.png)
+Maintenance functionality has been implemented.  
+If there is no connection to the Didify server, it will automatically switch to the maintenance screen.  
+The text to be displayed is  
+.env `NEXT_PUBLIC_MAINTENANCE_TITLE` `NEXT_PUBLIC_MAINTENANCE_BODY`.
+
+
 ### v0.0.3
 Google Tag Mnagager is now supported.
 Specify the ID of Google tag manager for GTMID.

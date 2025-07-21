@@ -4,7 +4,6 @@ import Script from "next/script";
 import type { Viewport } from 'next'
 import { GoogleTagManager } from '@next/third-parties/google'
 
-
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,12 +14,7 @@ export const metadata: Metadata = {
   icons: {
     icon: process.env.NEXT_PUBLIC_APP_FAVICON_URL,
   },
-  // icons: [{
-  //   rel: 'icon',
-  //   url: process.env.NEXT_PUBLIC_APP_FAVICON_URL
-  // }]
 };
-
 
 export const viewport: Viewport = {
   initialScale: 1,
@@ -36,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning={true}>
         {children}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" strategy="beforeInteractive" />
         {process.env.GTMID != "" &&

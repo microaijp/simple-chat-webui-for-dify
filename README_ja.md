@@ -38,6 +38,11 @@ BASIC_AUTH_PASSWORD="basic_pass"
 
 ## Change log
 
+### v0.0.5
+Next.js の最新版 15.4.2 にバージョンアップしました。
+加えて、これにより発生する不具合を修正しました。
+
+
 ### v0.0.4
 ![0.0.4](public/readme/0.0.4-1.png)
 メンテナンス機能を実装しました。  

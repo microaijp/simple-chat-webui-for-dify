@@ -39,6 +39,10 @@ If authentication is not needed, leave it empty.
 
 ## Change log
 
+### v0.0.6
+Fixed library compatibility errors
+
+
 ### v0.0.5
 Upgraded to the latest version of Next.js 15.4.2.
 Additionally, fixed bugs that occurred due to this upgrade.

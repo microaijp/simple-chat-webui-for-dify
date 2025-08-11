@@ -29,23 +29,28 @@ npm run dev
 
 ## BASIC認証
 ```
+# If authentication is required, set it to "BASIC"; otherwise, leave it empty.
 AUTH_MODE="BASIC"
-BASIC_AUTH_USER="basic_user"
-BASIC_AUTH_PASSWORD="basic_pass"
+# If you want to set multiple users, use the following format:
+BASIC_AUTH_USERS='{"user1":"pass1","user2":"pass2","admin":"adminpass"}'
 ```
-`AUTH_MODE`を`BASIC`にすることで、BASIC認証をかけることができます。
-認証が不要な場合は、空に設定してください。
+`AUTH_MODE`を`BASIC`にすることで、複数ユーザー対応のBASIC認証をかけることができます。
+認証が不要な場合は、`AUTH_MODE`を空に設定してください。
 
 ## Change log
+
+### v0.0.7
+複数ユーザー対応とCtrl+Enterキーボードショートカットを追加しました。
+- **複数ユーザー対応**: `/api/auth/user` エンドポイントを通じて各ユーザーが適切に識別・追跡されるようになりました
+- **Ctrl+Enterショートカット**: より高速なチャット操作のためのCtrl+Enterキーボードショートカットでメッセージ送信が可能になりました
+- **ユーザー追跡の改善**: フォールバックUUID生成機能付きのユーザーセッション管理を改善しました
 
 ### v0.0.6
 ライブラリの互換性エラーを修正
 
-
 ### v0.0.5
 Next.js の最新版 15.4.2 にバージョンアップしました。
 加えて、これにより発生する不具合を修正しました。
-
 
 ### v0.0.4
 ![0.0.4](public/readme/0.0.4-1.png)
@@ -53,7 +58,6 @@ Next.js の最新版 15.4.2 にバージョンアップしました。
 Difyのサーバーに接続ができない場合、自動的にメンテナンス画面に切り替わります。  
 表示するテキストは  
 .env `NEXT_PUBLIC_MAINTENANCE_TITLE` `NEXT_PUBLIC_MAINTENANCE_BODY` で設定可能です
-
 
 ### v0.0.3
 Google Tag Manager に対応しました。

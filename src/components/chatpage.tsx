@@ -10,7 +10,8 @@ import useAutosizeTextArea from '@/libs/useAutosizeTextArea';
 
 export default function ChatPage() {
 
-  const [user, setUser] = useState(uuidv4());
+  // const [user, setUser] = useState(uuidv4());
+  const [user, setUser] = useState('');
 
   const [conversationId, setConversationId] = useState('');
   const [waiting, setWaiting] = useState(false);
@@ -83,6 +84,25 @@ export default function ChatPage() {
 
   useEffect(() => {
 
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('/api/auth/user');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.user) {
+            setUser(data.user);
+          } else {
+            setUser(uuidv4());
+          }
+        } else {
+          setUser(uuidv4());
+        }
+      } catch (error) {
+        setUser(uuidv4());
+      }
+    };
+
+    fetchUser();
 
     chatRef.current.addEventListener('focusin', handleFocusIn);
     chatRef.current.addEventListener('focusout', handleFocusOut);
@@ -121,18 +141,46 @@ export default function ChatPage() {
 
   }, []);
 
+  const handleKeyDown = (evt: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (evt.ctrlKey && evt.key === 'Enter') {
+      evt.preventDefault(); // Prevent default behavior (new line)
+      sendMessage();
+    }
+  };
+
+
   const sendMessage = async (directMessage = null) => {
 
     if ((message || directMessage) && waiting == false) {
 
+      // Ensure user is set before sending message
+      let currentUser = user;
+      if (!currentUser) {
+        try {
+          const response = await fetch('/api/auth/user');
+          if (response.ok) {
+            const data = await response.json();
+            currentUser = data.user || uuidv4();
+            setUser(currentUser); // Update state for future use
+          } else {
+            currentUser = uuidv4();
+            setUser(currentUser);
+          }
+        } catch (error) {
+          currentUser = uuidv4();
+          setUser(currentUser);
+        }
+      }
+
       const chat_message = {
         'inputs': {},
-        'user': user,
+        'user': currentUser, // Use currentUser instead of user
         'response_mode': 'streaming',
         'query': directMessage || message,
         'conversation_id': conversationId
       };
 
+      console.log('Sending chat_message:', chat_message); // Debug log
 
       // from user
       addChatItem({
@@ -158,8 +206,6 @@ export default function ChatPage() {
           behavior: 'smooth'
         });
       }, 100);
-
-
 
       setWaiting(true);
 
@@ -220,8 +266,6 @@ export default function ChatPage() {
 
     }
   };
-
-
 
 
 
@@ -345,6 +389,7 @@ export default function ChatPage() {
                     placeholder={process.env.NEXT_PUBLIC_CHAT_PLACEHODLER}
                     value={message}
                     onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                   />
 
                   <button

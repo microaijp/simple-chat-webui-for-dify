@@ -5,18 +5,17 @@ export const config = {
     matcher: ['/(.*)'],
 };
 
+
 export function middleware(req: NextRequest) {
-
     if (process.env.AUTH_MODE == "BASIC") {
-
         const basicAuth = req.headers.get('Authorization');
-
         if (basicAuth) {
-
             const authValue = basicAuth.split(' ')[1];
             const [user, password] = atob(authValue).split(':');
 
-            if (user === process.env.BASIC_AUTH_USER && password === process.env.BASIC_AUTH_PASSWORD) {
+            const users = JSON.parse(process.env.BASIC_AUTH_USERS || '{}');
+
+            if (users[user] && users[user] === password) {
                 return NextResponse.next();
             }
 

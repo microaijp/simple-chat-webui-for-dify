@@ -30,23 +30,28 @@ You can customize it with the .env file.
 
 ## BASIC Authentication
 ```
+# If authentication is required, set it to "BASIC"; otherwise, leave it empty.
 AUTH_MODE="BASIC"
-BASIC_AUTH_USER="basic_user"
-BASIC_AUTH_PASSWORD="basic_pass"
+# If you want to set multiple users, use the following format:
+BASIC_AUTH_USERS='{"user1":"pass1","user2":"pass2","admin":"adminpass"}'
 ```
-By setting `AUTH_MODE` to `BASIC`, you can enable BASIC authentication.
-If authentication is not needed, leave it empty.
+By setting `AUTH_MODE` to `BASIC`, you can enable BASIC authentication with multiple users support.
+If authentication is not needed, leave `AUTH_MODE` empty.
 
 ## Change log
+
+### v0.0.7
+Multiple user support and Ctrl+Enter keyboard shortcut added.
+- **Multiple User Support**: Each user is now properly identified and tracked through the `/api/auth/user` endpoint
+- **Ctrl+Enter Shortcut**: Users can now send messages using Ctrl+Enter keyboard combination for faster chat interaction
+- **User Tracking**: Improved user session management with fallback UUID generation
 
 ### v0.0.6
 Fixed library compatibility errors
 
-
 ### v0.0.5
 Upgraded to the latest version of Next.js 15.4.2.
 Additionally, fixed bugs that occurred due to this upgrade.
-
 
 ### v0.0.4
 ![0.0.4](public/readme/0.0.4-1.png)
@@ -54,7 +59,6 @@ Maintenance functionality has been implemented.
 If there is no connection to the Didify server, it will automatically switch to the maintenance screen.  
 The text to be displayed is  
 .env `NEXT_PUBLIC_MAINTENANCE_TITLE` `NEXT_PUBLIC_MAINTENANCE_BODY`.
-
 
 ### v0.0.3
 Google Tag Mnagager is now supported.
@@ -68,7 +72,6 @@ Example: `GTM-KZR8CDNR`
 ###### GoogleTagManager
 GTMID=
 ```
-
 
 ### v0.0.2
 The OPENING QUESTIONS function is now supported.
